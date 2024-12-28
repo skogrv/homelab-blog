@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
 from django.views import View
 from .forms import UserRegisterForm
 # Create your views here.
@@ -12,6 +13,7 @@ class RegisterView(View):
         form = UserRegisterForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect('index')
         return render(request, 'users/register.html', {'form': form})
