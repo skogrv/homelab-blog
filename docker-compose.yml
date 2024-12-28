@@ -2,12 +2,12 @@ services:
   app: 
     build: ./app/
     volumes:
-      - ./app/:/usr/src/app/
-    ports:
-      - 8000:8000
+      - static_volume:/usr/src/app/blog/staticfiles
+    command: gunicorn homelab_blog.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
     env_file:
-      - ./app/.env.dev
-      - ./db/.env.dev
+      - ./app/.env.prod
     depends_on:
       - db
   db: 
@@ -15,6 +15,16 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./db/.env.dev
+      - ./db/.env.prod.db
+  nginx: 
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/app/blog/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - app
 volumes: 
   postgres_data:
+  static_volume:
+

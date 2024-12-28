@@ -1,5 +1,5 @@
 FROM python:3.12.8-alpine3.21
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
