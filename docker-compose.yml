@@ -10,7 +10,7 @@ services:
       - ./app/.env.prod
     depends_on:
       - db
-  restart: always
+    restart: always
   db: 
     image: postgres:17.2
     volumes:
