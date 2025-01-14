@@ -19,7 +19,7 @@ jobs:
             git pull
             echo "${{ secrets.ENV_PROD }}" > app/.env.prod
             echo "${{ secrets.ENV_PROD_DB }}" > db/.env.prod.db
-            docker compose down
+            docker compose down --rmi all
             docker compose up --build -d
           host: ${{ secrets.VPS_HOST }}
           user: 'root'
