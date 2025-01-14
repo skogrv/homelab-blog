@@ -1,0 +1,24 @@
+name: CI/CD for django blog
+on: 
+  workflow_dispatch:
+  push: 
+    branches: 
+      - main
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to server
+        uses: fifsky/ssh-action@master
+        with: 
+          command: | 
+            cd /tmp
+            touch test.php
+          host: ${{ secrets.VPS_HOST }}
+          user: 'root'
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+    
