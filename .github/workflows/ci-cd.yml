@@ -15,8 +15,9 @@ jobs:
         uses: fifsky/ssh-action@master
         with: 
           command: | 
+            rm -rf ~/homelab-blog
+            git clone git@github.com:skogrv/homelab-blog.git ~/homelab-blog
             cd homelab-blog
-            git pull
             echo "${{ secrets.ENV_PROD }}" > app/.env.prod
             echo "${{ secrets.ENV_PROD_DB }}" > db/.env.prod.db
             docker compose down --rmi all
