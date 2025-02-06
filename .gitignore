@@ -1,2 +1,3 @@
 db/.env.prod.db
 app/.env.prod
+certbot/
